@@ -1,7 +1,6 @@
-package com.didorg.graphqlspringboot.repository;
+package com.didorg.graphqlspringboot.persistence.repository;
 
-import com.didorg.graphqlspringboot.model.Book;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.didorg.graphqlspringboot.persistence.domain.Book;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
@@ -13,8 +12,12 @@ import java.util.UUID;
 
 @Repository
 public class BookRepository {
-    @Autowired
-    private R2dbcEntityTemplate template;
+
+    private final R2dbcEntityTemplate template;
+
+    public BookRepository(R2dbcEntityTemplate template) {
+        this.template = template;
+    }
 
     public Mono<Book> getBook(UUID id) {
         return template.select(Book.class).matching(Query.query(Criteria.where("id").is(id))).one();

@@ -1,4 +1,4 @@
-package com.didorg.graphqlspringboot.model;
+package com.didorg.graphqlspringboot.persistence.domain;
 
 import com.didorg.graphqlspringboot.constant.Category;
 import org.springframework.data.annotation.Id;

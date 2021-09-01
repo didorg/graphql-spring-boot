@@ -1,12 +1,11 @@
 package com.didorg.graphqlspringboot;
 
-import com.didorg.graphqlspringboot.service.AuthorService;
-import com.didorg.graphqlspringboot.service.BookService;
+import com.didorg.graphqlspringboot.service.IAuthorService;
+import com.didorg.graphqlspringboot.service.IBookService;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.*;
 import io.r2dbc.spi.ConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,10 +18,13 @@ import java.io.IOException;
 @SpringBootApplication
 public class GraphqlSpringBootApplication {
 
-	@Autowired
-	private BookService bookService;
-	@Autowired
-	private AuthorService authorService;
+	private final IBookService bookService;
+	private final IAuthorService authorService;
+
+	public GraphqlSpringBootApplication(IBookService bookService, IAuthorService authorService) {
+		this.bookService = bookService;
+		this.authorService = authorService;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(GraphqlSpringBootApplication.class, args);

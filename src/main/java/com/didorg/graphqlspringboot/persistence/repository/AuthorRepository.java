@@ -1,7 +1,6 @@
-package com.didorg.graphqlspringboot.repository;
+package com.didorg.graphqlspringboot.persistence.repository;
 
-import com.didorg.graphqlspringboot.model.Author;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.didorg.graphqlspringboot.persistence.domain.Author;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
@@ -12,8 +11,12 @@ import java.util.UUID;
 
 @Repository
 public class AuthorRepository {
-    @Autowired
-    private R2dbcEntityTemplate template;
+
+    private final R2dbcEntityTemplate template;
+
+    public AuthorRepository(R2dbcEntityTemplate template) {
+        this.template = template;
+    }
 
     public Mono<UUID> createAuthor(Author author) {
         UUID authorId = UUID.randomUUID();

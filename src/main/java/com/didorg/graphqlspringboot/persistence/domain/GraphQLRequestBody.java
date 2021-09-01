@@ -1,4 +1,4 @@
-package com.didorg.graphqlspringboot.model;
+package com.didorg.graphqlspringboot.persistence.domain;
 
 import java.util.Collections;
 import java.util.Map;

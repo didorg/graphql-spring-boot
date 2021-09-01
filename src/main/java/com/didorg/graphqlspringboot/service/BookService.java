@@ -1,10 +1,9 @@
 package com.didorg.graphqlspringboot.service;
 
 import com.didorg.graphqlspringboot.constant.Category;
-import com.didorg.graphqlspringboot.model.Book;
-import com.didorg.graphqlspringboot.repository.BookRepository;
+import com.didorg.graphqlspringboot.persistence.domain.Book;
+import com.didorg.graphqlspringboot.persistence.repository.BookRepository;
 import graphql.schema.DataFetcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +11,15 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class BookService {
-    @Autowired
-    private BookRepository bookRepository;
-    @Autowired
-    private AuthorService authorService;
+public class BookService implements IBookService{
+
+    private final BookRepository bookRepository;
+    private final AuthorService authorService;
+
+    public BookService(BookRepository bookRepository, AuthorService authorService) {
+        this.bookRepository = bookRepository;
+        this.authorService = authorService;
+    }
 
     public DataFetcher<CompletableFuture<Book>> getBook() {
         return env -> {
