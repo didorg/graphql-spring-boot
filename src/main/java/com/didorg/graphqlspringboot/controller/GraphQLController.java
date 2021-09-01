@@ -21,9 +21,9 @@ public class GraphQLController {
     }
 
     @PostMapping(value="graphql")
-    public Mono<Map<String,Object>> execute(@RequestBody GraphQLRequestBody body) {
-        return Mono.fromCompletionStage(graphql.executeAsync(ExecutionInput.newExecutionInput().query(body.getQuery())
-                        .operationName(body.getOperationName()).variables(body.getVariables()).build()))
+    public Mono<Map<String,Object>> execute(@RequestBody GraphQLRequestBody requestBody) {
+        return Mono.fromCompletionStage(graphql.executeAsync(ExecutionInput.newExecutionInput().query(requestBody.getQuery())
+                        .operationName(requestBody.getOperationName()).variables(requestBody.getVariables()).build()))
                 .map(ExecutionResult::toSpecification);
     }
 }
