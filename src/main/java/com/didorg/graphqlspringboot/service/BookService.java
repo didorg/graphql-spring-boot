@@ -11,7 +11,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class BookService implements IBookService{
+public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
     private final AuthorService authorService;
