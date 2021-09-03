@@ -5,7 +5,7 @@
 
 #### Open http://localhost:8080/graphql in `GraphQL Playground`(or one of your preference)  
 
-#### Try  
+#### Create a Book   
 
 ```
 mutation {
@@ -18,7 +18,7 @@ mutation {
   )
 }
 ```
-#### Query:  
+#### Get a Book by id:  
 
 ```
 query{
